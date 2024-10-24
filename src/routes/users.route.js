@@ -4,8 +4,8 @@ const router = express.Router();
 const { CREATE } = require('../controllers/users.controller.js');
 
 
-// Public routes
-router.post('/register', CREATE);
+// Public route
+router.post('/', CREATE);
 
 
 module.exports = router;

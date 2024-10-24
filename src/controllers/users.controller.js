@@ -6,7 +6,7 @@ exports.CREATE = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-     if (!email|| !name || !password ){
+    if (!email|| !name || !password ){
       return res.status(400).json({ message: 'Invalid input' });
     }
 
@@ -16,8 +16,8 @@ exports.CREATE = async (req, res) => {
 
     const user = await userService.register({ name, email, password });
 
-    return res.status(201).json(user);
+    res.status(201).json(user);
   } catch (error) {
-    res.status(error.code || 400).json({ message: error.message });
+    res.status(error.code).json({ message: error.message });
   }
 };
