@@ -14,10 +14,10 @@ exports.CREATE = async (req, res) => {
       return res.status(422).json({ message: 'Invalid email format' });
     }
 
-    const user = userService.register({ name, email, password });
+    const user = await userService.register({ name, email, password });
 
-    res.status(201).json(user);
+    return res.status(201).json(user);
   } catch (error) {
-    res.status(error.code).json({ message: error.message });
+    res.status(error.code || 400).json({ message: error.message });
   }
 };

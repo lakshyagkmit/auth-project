@@ -1,13 +1,14 @@
 const User = require('../models/User.js');
 const { hashPassword } = require('../utils/password.js');
 const generateToken = require('../utils/generateJwtToken.js');
+const CustomError = require('../utils/customError'); 
 
 
 // Register a new user
 const register = async ({ name, email, password }) => {
   const userExists = await User.findOne({ email });
   if (userExists) {
-    throw new Error('User already exists', { code: 409 });
+    throw new CustomError('User already exists', 409);
   }
 
   const hashedPassword = await hashPassword(password);
@@ -27,8 +28,6 @@ const register = async ({ name, email, password }) => {
     token: generateToken(user._id),
   };
 };
-
-
 
 module.exports = {
   register
