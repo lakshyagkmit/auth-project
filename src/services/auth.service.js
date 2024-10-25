@@ -24,7 +24,17 @@ const loginUser = async ({ email, password }) => {
   };
 };
 
+// check user authentication
+const checkAuth = async(decoded) => {
+  const user = await User.findById(decoded.id).select('-password');
+
+  if(!user){
+    throw new Error('Not authenticated, token failed');
+  }
+  return user;
+}
 
 module.exports = {
-  loginUser
+  loginUser,
+  checkAuth
 }
