@@ -1,7 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/database');
 const dotenv = require('dotenv');
-const userRoutes = require('./routes/users.route.js')
+const router= require('./routes');
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/api/users', userRoutes);
+router.registerRoutes(app);
 
 
 const PORT = process.env.PORT || 3000;
