@@ -2,7 +2,18 @@ const User = require('../models/User.js');
 const { comparePassword } = require('../utils/password.js');
 const { generateToken } = require('../utils/generateJwtToken.js');
 const CustomError = require('../utils/customError'); 
+const userService = require('./users.service.js');
 
+const registerUser = async({name, email, password}) => {
+  const user = await userService.createUser({name, email, password});
+
+  return {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    token: user.token
+  }
+}
 
 // Authenticate a user during login
 const loginUser = async ({ email, password }) => {
@@ -35,6 +46,7 @@ const checkAuth = async(decoded) => {
 }
 
 module.exports = {
+  registerUser,
   loginUser,
   checkAuth
 }

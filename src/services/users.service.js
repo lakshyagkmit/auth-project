@@ -4,7 +4,7 @@ const {generateToken} = require('../utils/generateJwtToken');
 
 
 // Register a new user
-const register = async ({ name, email, password }) => {
+const createUser = async ({ name, email, password }) => {
   const userExists = await User.findOne({ email });
   if (userExists) {
     throw new Error('User already exists');
@@ -37,6 +37,6 @@ const getUsersData = async () => {
 
 
 module.exports = {
-  register,
+  createUser,
   getUsersData
 };
