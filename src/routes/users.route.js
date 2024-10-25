@@ -1,11 +1,15 @@
 // routes/authRoutes.js
 const express = require('express');
 const router = express.Router();
-const { CREATE } = require('../controllers/users.controller.js');
+const { create, get } = require('../controllers/users.controller.js');
+const { checkAuthentication } = require('../middlewares/auth.middleware.js');
 
 
-// Public routes
-router.post('/', CREATE);
+// Public route
+router.post('/', create);
+
+//Protected route
+router.get('/', checkAuthentication, get);
 
 
 module.exports = router;
