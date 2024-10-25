@@ -1,13 +1,13 @@
 const User = require('../models/User.js');
 const { hashPassword } = require('../utils/password.js');
-const generateToken = require('../utils/generateJwtToken.js');
+const {generateToken} = require('../utils/generateJwtToken');
 
 
 // Register a new user
 const register = async ({ name, email, password }) => {
   const userExists = await User.findOne({ email });
   if (userExists) {
-    throw new Error('User already exists', { code: 409 });
+    throw new Error('User already exists');
   }
 
   const hashedPassword = await hashPassword(password);

@@ -5,7 +5,7 @@ const { CREATE } = require('../controllers/users.controller.js');
 
 
 // Public routes
-router.post('/register', CREATE);
+router.post('/', CREATE);
 
 
 module.exports = router;
