@@ -2,7 +2,7 @@ const validateEmail = require('../validators/email.validate.js');
 const userService = require('../services/users.service.js');
 
 // create user controller
-exports.CREATE = async (req, res) => {
+const create = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
@@ -21,3 +21,18 @@ exports.CREATE = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+//get user controller 
+const get = async (req, res) => {
+  try {
+    const data = await userService.getUsersData();
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  create,
+  get
+}

@@ -28,8 +28,15 @@ const register = async ({ name, email, password }) => {
   };
 };
 
+// get user data
+const getUsersData = async () => {
+  const axios = require('axios');
+  const response = await axios.get('https://dummyjson.com/users');
+  return response.data;
+};
 
 
 module.exports = {
-  register
+  register,
+  getUsersData
 };
